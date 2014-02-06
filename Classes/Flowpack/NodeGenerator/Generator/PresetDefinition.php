@@ -108,7 +108,7 @@ class PresetDefinition {
 			$maximum = ceil($this->nodeByLevel + $variant);
 			$nodeByLevel = rand($minimum, $maximum);
 		} else {
-			$nodeByLevel = $this->depth;
+			$nodeByLevel = $this->nodeByLevel;
 		}
 		return $nodeByLevel;
 	}
@@ -123,7 +123,7 @@ class PresetDefinition {
 			$maximum = ceil($this->contentNodeByDocument + $variant);
 			$contentNodeByDocument = rand($minimum, $maximum);
 		} else {
-			$contentNodeByDocument = $this->depth;
+			$contentNodeByDocument = $this->contentNodeByDocument;
 		}
 		return $contentNodeByDocument;
 	}
