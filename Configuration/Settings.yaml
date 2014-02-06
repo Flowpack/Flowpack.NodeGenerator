@@ -1,0 +1,51 @@
+Flowpack:
+  NodeGenerator:
+    preset:
+      small:
+        depth: 3
+        nodeByLevel: 10
+        contentNodeByDocument: 5
+        documentNodeType: 'TYPO3.Neos.NodeTypes:Page'
+        contentNodeType: 'TYPO3.Neos.NodeTypes:Text'
+        # Randomness of the number of nodes generated from 0 to 100
+        randomness: 25
+      medium:
+        depth: 8
+        nodeByLevel: 15
+        contentNodeByDocument: 10
+        documentNodeType: 'TYPO3.Neos.NodeTypes:Page'
+        contentNodeType: 'TYPO3.Neos.NodeTypes:Text'
+        # Randomness of the number of nodes generated from 0 to 100
+        randomness: 45
+      big:
+        depth: 12
+        nodeByLevel: 25
+        contentNodeByDocument: 15
+        documentNodeType: 'TYPO3.Neos.NodeTypes:Page'
+        contentNodeType: 'TYPO3.Neos.NodeTypes:Text'
+        # Randomness of the number of nodes generated from 0 to 100
+        randomness: 15
+      small-blog:
+        depth: 2
+        nodeByLevel: 10
+        contentNodeByDocument: 20
+        documentNodeType: 'Ttree.Blog:Post'
+        contentNodeType: 'TYPO3.Neos.NodeTypes:Text'
+        # Randomness of the number of nodes generated from 0 to 100
+        randomness: 0
+      medium-blog:
+        depth: 2
+        nodeByLevel: 200
+        contentNodeByDocument: 40
+        documentNodeType: 'Ttree.Blog:Post'
+        contentNodeType: 'TYPO3.Neos.NodeTypes:Text'
+        # Randomness of the number of nodes generated from 0 to 100
+        randomness: 12
+      big-blog:
+        depth: 0
+        nodeByLevel: 1200
+        contentNodeByDocument: 40
+        documentNodeType: 'Ttree.Blog:Post'
+        contentNodeType: 'TYPO3.Neos.NodeTypes:Text'
+        # Randomness of the number of nodes generated from 0 to 100
+        randomness: 12
