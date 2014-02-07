@@ -8,6 +8,9 @@ namespace Flowpack\NodeGenerator\Generator\Document;
 
 use TYPO3\Faker\Date;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Resource\ResourceManager;
+use TYPO3\Media\Domain\Model\Image;
+use TYPO3\Media\Domain\Repository\ImageRepository;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use TYPO3\TYPO3CR\Domain\Model\NodeType;
 
@@ -25,6 +28,7 @@ class PostGeneratorImplementation extends PageGeneratorImplementation {
 		$postNode = parent::create($parentNode, $nodeType);
 		$date = Date::random('-1 week');
 		$postNode->setProperty('datePublished', $date);
+		$postNode->setProperty('image', $this->getRandommImageVariant());
 
 		return $postNode;
 	}

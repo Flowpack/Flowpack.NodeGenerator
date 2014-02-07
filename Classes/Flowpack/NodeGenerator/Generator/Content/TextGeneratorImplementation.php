@@ -20,7 +20,7 @@ class TextGeneratorImplementation extends AstractNodeGeneratorImplementation {
 	/**
 	 * @param NodeInterface $parentNode
 	 * @param NodeType $nodeType
-	 * @return NodeInterface|void
+	 * @return NodeInterface
 	 */
 	public function create(NodeInterface $parentNode, NodeType $nodeType) {
 		$contentNode = $parentNode->createNode(uniqid('node'), $nodeType);
