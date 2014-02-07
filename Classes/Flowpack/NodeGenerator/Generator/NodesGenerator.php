@@ -6,11 +6,13 @@ namespace Flowpack\NodeGenerator\Generator;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Faker\Company;
-use TYPO3\Faker\Lorem;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Exception;
+use TYPO3\Flow\Object\ObjectManagerInterface;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\TYPO3CR\Utility;
+use TYPO3\TYPO3CR\Domain\Model\NodeType;
+use TYPO3\TYPO3CR\Domain\Service\NodeTypeManager;
+use TYPO3\TYPO3CR\Exception\NodeExistsException;
 
 /**
  * Node Generator
@@ -19,14 +21,26 @@ class NodesGenerator {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\TYPO3CR\Domain\Service\NodeTypeManager
+	 * @var NodeTypeManager
 	 */
 	protected $nodeTypeManager;
+
+	/**
+	 * @Flow\Inject
+	 * @var ObjectManagerInterface
+	 */
+	protected $objectManager;
 
 	/**
 	 * @var PresetDefinition
 	 */
 	protected $preset;
+
+	/**
+	 * @Flow\Inject(setting="generator")
+	 * @var array
+	 */
+	protected $generators;
 
 	/**
 	 * @param PresetDefinition $preset
@@ -37,31 +51,54 @@ class NodesGenerator {
 
 	public function generate() {
 		$siteNode = $this->preset->getSiteNode();
-		$this->createBatchNode($siteNode);
+		$this->createBatchDocumentNode($siteNode);
+	}
+
+	/**
+	 * @param NodeType $nodeType
+	 * @return NodeGeneratorImplementationInterface
+	 * @throws \TYPO3\Flow\Exception
+	 */
+	protected function getNodeGeneratorImplementationClassByNodeType(NodeType $nodeType) {
+		if (!isset($this->generators[(string)$nodeType]['class'])) {
+			throw new Exception(sprintf('Unknown generator for the current Node Type (%s)', (string)$nodeType, 1391771111));
+		}
+		return $this->objectManager->get($this->generators[(string)$nodeType]['class']);
 	}
 
 	/**
 	 * @param NodeInterface $baseNode
 	 * @param int $level
 	 */
-	protected function createBatchNode(NodeInterface $baseNode, $level = 0) {
-		$documentNodeType = $this->nodeTypeManager->getNodeType($this->preset->getDocumentNodeType());
-		$contentNodeType = $this->nodeTypeManager->getNodeType($this->preset->getContentNodeType());
+	protected function createBatchDocumentNode(NodeInterface $baseNode, $level = 0) {
 		for ($i = 0; $i < $this->preset->getNodeByLevel(); $i++) {
-			$title = Company::name();
-			$name = Utility::renderValidNodeName($title);
-			if (!($baseNode->getNode($name))) {
-				$childrenNode = $baseNode->createNode($name, $documentNodeType);
-				$childrenNode->setProperty('title', $title);
-				$mainContentCollection = $childrenNode->getNode('main');
-				for ($j = 0; $j < $this->preset->getContentNodeByDocument(); $j++) {
-					$contentNode = $mainContentCollection->createNode(uniqid('node'), $contentNodeType);
-					$contentNode->setProperty('text', sprintf('<p>%s</p>', Lorem::paragraph(rand(1, 4))));
-				}
+			try {
+				$nodeType = $this->nodeTypeManager->getNodeType($this->preset->getDocumentNodeType());
+				$generator = $this->getNodeGeneratorImplementationClassByNodeType($nodeType);
+				$childrenNode = $generator->create($baseNode, $nodeType);
+				$this->createBatchContentNodes($childrenNode);
 				if ($level < $this->preset->getDepth()) {
 					$level++;
-					$this->createBatchNode($childrenNode, $level);
+					$this->createBatchDocumentNode($childrenNode, $level);
 				}
+			} catch (NodeExistsException $e) {
+
+			}
+		}
+	}
+
+	/**
+	 * @param NodeInterface $documentNode
+	 */
+	protected function createBatchContentNodes(NodeInterface $documentNode) {
+		$mainContentCollection = $documentNode->getNode('main');
+		for ($j = 0; $j < $this->preset->getContentNodeByDocument(); $j++) {
+			try {
+				$nodeType = $this->nodeTypeManager->getNodeType($this->preset->getContentNodeType());
+				$generator = $this->getNodeGeneratorImplementationClassByNodeType($nodeType);
+				$generator->create($mainContentCollection, $nodeType);
+			} catch (NodeExistsException $e) {
+
 			}
 		}
 	}

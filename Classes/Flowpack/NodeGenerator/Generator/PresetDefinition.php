@@ -35,12 +35,12 @@ class PresetDefinition {
 	protected $depth;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
 	protected $documentNodeType;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
 	protected $contentNodeType;
 
@@ -50,6 +50,7 @@ class PresetDefinition {
 	protected $randomness;
 
 	/**
+	 * @param NodeInterface $siteNode
 	 * @param array $configuration
 	 */
 	function __construct(NodeInterface $siteNode, array $configuration) {
@@ -57,8 +58,8 @@ class PresetDefinition {
 		$this->nodeByLevel = (int)$configuration['nodeByLevel'];
 		$this->contentNodeByDocument = (int)$configuration['contentNodeByDocument'];
 		$this->depth = (int)$configuration['depth'];
-		$this->contentNodeType = $configuration['contentNodeType'];
-		$this->documentNodeType = $configuration['documentNodeType'];
+		$this->contentNodeType = (array)$configuration['contentNodeType'];
+		$this->documentNodeType = (array)$configuration['documentNodeType'];
 		$this->randomness = (int)$configuration['randomness'];
 	}
 
@@ -73,7 +74,7 @@ class PresetDefinition {
 	 * @return string
 	 */
 	public function getContentNodeType() {
-		return $this->contentNodeType;
+		return (string)$this->contentNodeType[array_rand($this->contentNodeType)];
 	}
 
 	/**
@@ -95,7 +96,7 @@ class PresetDefinition {
 	 * @return string
 	 */
 	public function getDocumentNodeType() {
-		return $this->documentNodeType;
+		return (string)$this->documentNodeType[array_rand($this->documentNodeType)];
 	}
 
 	/**
