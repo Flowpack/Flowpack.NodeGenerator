@@ -16,20 +16,21 @@ use TYPO3\TYPO3CR\Utility;
 /**
  * Page Node Generator
  */
-class PageGeneratorImplementation extends AstractNodeGeneratorImplementation {
+class PageGeneratorImplementation extends AstractNodeGeneratorImplementation
+{
+    /**
+     * @param NodeInterface $parentNode
+     * @param NodeType $nodeType
+     * @return NodeInterface|void
+     */
+    public function create(NodeInterface $parentNode, NodeType $nodeType)
+    {
+        $title = Company::name();
+        $name = Utility::renderValidNodeName($title);
 
-	/**
-	 * @param NodeInterface $parentNode
-	 * @param NodeType $nodeType
-	 * @return NodeInterface|void
-	 */
-	public function create(NodeInterface $parentNode, NodeType $nodeType) {
-		$title = Company::name();
-		$name = Utility::renderValidNodeName($title);
+        $childrenNode = $parentNode->createNode($name, $nodeType);
+        $childrenNode->setProperty('title', $title);
 
-		$childrenNode = $parentNode->createNode($name, $nodeType);
-		$childrenNode->setProperty('title', $title);
-
-		return $childrenNode;
-	}
+        return $childrenNode;
+    }
 }

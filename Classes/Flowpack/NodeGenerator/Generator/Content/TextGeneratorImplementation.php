@@ -15,17 +15,18 @@ use TYPO3\TYPO3CR\Domain\Model\NodeType;
 /**
  * Text Node Generator
  */
-class TextGeneratorImplementation extends AstractNodeGeneratorImplementation {
+class TextGeneratorImplementation extends AstractNodeGeneratorImplementation
+{
+    /**
+     * @param NodeInterface $parentNode
+     * @param NodeType $nodeType
+     * @return NodeInterface
+     */
+    public function create(NodeInterface $parentNode, NodeType $nodeType)
+    {
+        $contentNode = $parentNode->createNode(uniqid('node'), $nodeType);
+        $contentNode->setProperty('text', sprintf('<p>%s</p>', Lorem::paragraph(rand(1, 10))));
 
-	/**
-	 * @param NodeInterface $parentNode
-	 * @param NodeType $nodeType
-	 * @return NodeInterface
-	 */
-	public function create(NodeInterface $parentNode, NodeType $nodeType) {
-		$contentNode = $parentNode->createNode(uniqid('node'), $nodeType);
-		$contentNode->setProperty('text', sprintf('<p>%s</p>', Lorem::paragraph(rand(1, 10))));
-
-		return $contentNode;
-	}
+        return $contentNode;
+    }
 }
