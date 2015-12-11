@@ -6,7 +6,7 @@ namespace Flowpack\NodeGenerator\Generator\Content;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Faker\Lorem;
+use KDambekalns\Faker\Lorem;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use TYPO3\TYPO3CR\Domain\Model\NodeType;
@@ -24,7 +24,7 @@ class ImageGeneratorImplementation extends TextGeneratorImplementation {
 	public function create(NodeInterface $parentNode, NodeType $nodeType) {
 		$node = parent::create($parentNode, $nodeType);
 		$node->setProperty('image', $this->getRandommImageVariant());
-		
+
 		if (rand(0,10) === 0) {
 			$node->setProperty('hasCaption', TRUE);
 			$node->setProperty('caption', Lorem::sentence(rand(5, 12)));

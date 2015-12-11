@@ -6,7 +6,7 @@ namespace Flowpack\NodeGenerator\Generator\Document;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Faker\Date;
+use KDambekalns\Faker\Date;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Resource\ResourceManager;
 use TYPO3\Media\Domain\Model\Image;
