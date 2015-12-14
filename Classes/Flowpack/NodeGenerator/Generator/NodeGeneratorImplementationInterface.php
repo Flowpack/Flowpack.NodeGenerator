@@ -13,12 +13,12 @@ use TYPO3\TYPO3CR\Domain\Model\NodeType;
 /**
  * Node Generator
  */
-interface NodeGeneratorImplementationInterface {
-
-	/**
-	 * @param NodeInterface $parentNode
-	 * @param NodeType $nodeType
-	 * @return NodeInterface The freshly created node
-	 */
-	public function create(NodeInterface $parentNode, NodeType $nodeType);
+interface NodeGeneratorImplementationInterface
+{
+    /**
+     * @param NodeInterface $parentNode
+     * @param NodeType $nodeType
+     * @return NodeInterface The freshly created node
+     */
+    public function create(NodeInterface $parentNode, NodeType $nodeType);
 }
