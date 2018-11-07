@@ -7,25 +7,27 @@ namespace Flowpack\NodeGenerator\Generator\Content;
  *                                                                        */
 
 use KDambekalns\Faker\Lorem;
-use Neos\ContentRepository\Exception\NodeExistsException;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Exception\NodeExistsException;
+use Neos\Flow\ResourceManagement\Exception;
 
 /**
- * Text with Images Node Generator
+ * Images Node Generator
  */
-class TextWithImageGeneratorImplementation extends TextGeneratorImplementation
+class ImageGeneratorImplementation extends TextGeneratorImplementation
 {
     /**
      * @param NodeInterface $parentNode
      * @param NodeType $nodeType
      * @return NodeInterface
      * @throws NodeExistsException
+     * @throws Exception
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {
         $node = parent::create($parentNode, $nodeType);
-        $node->setProperty('image', $this->getRandommImageVariant());
+        $node->setProperty('image', $this->getRandomImageVariant());
 
         if (rand(0, 10) === 0) {
             $node->setProperty('hasCaption', true);

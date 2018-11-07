@@ -19,7 +19,7 @@ Flowpack:
         nodeByLevel: 10
         contentNodeByDocument: 5
         documentNodeType: [ 'Neos.NodeTypes:Page' ]
-        contentNodeType: [ 'Neos.NodeTypes:Text' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 25
       medium-website:
@@ -27,7 +27,7 @@ Flowpack:
         nodeByLevel: 15
         contentNodeByDocument: 10
         documentNodeType: [ 'Neos.NodeTypes:Page' ]
-        contentNodeType: [ 'Neos.NodeTypes:Text' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 45
       big-website:
@@ -35,7 +35,7 @@ Flowpack:
         nodeByLevel: 25
         contentNodeByDocument: 15
         documentNodeType: [ 'Neos.NodeTypes:Page' ]
-        contentNodeType: [ 'Neos.NodeTypes:Text' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 15
 
@@ -44,7 +44,7 @@ Flowpack:
         depth: 0
         nodeByLevel: 10
         contentNodeByDocument: 20
-        documentNodeType: [ 'Ttree.Blog:Post' ]
+        documentNodeType: [ 'Neos.NodeTypes:Page' ]
         contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:Image', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 0
@@ -52,7 +52,7 @@ Flowpack:
         depth: 0
         nodeByLevel: 50
         contentNodeByDocument: 25
-        documentNodeType: [ 'Ttree.Blog:Post' ]
+        documentNodeType: [ 'Neos.NodeTypes:Page' ]
         contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:Image', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 12
@@ -60,7 +60,7 @@ Flowpack:
         depth: 0
         nodeByLevel: 200
         contentNodeByDocument: 30
-        documentNodeType: [ 'Ttree.Blog:Post' ]
+        documentNodeType: [ 'Neos.NodeTypes:Page' ]
         contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:Image', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 12

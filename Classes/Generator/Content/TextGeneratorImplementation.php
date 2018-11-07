@@ -1,33 +1,33 @@
 <?php
-namespace Flowpack\NodeGenerator\Generator\Document;
+namespace Flowpack\NodeGenerator\Generator\Content;
 
 /*                                                                        *
  * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
-use KDambekalns\Faker\Date;
+use Flowpack\NodeGenerator\Generator\AbstractNodeGeneratorImplementation;
+use KDambekalns\Faker\Lorem;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Exception\NodeExistsException;
 
 /**
- * Post Node Generator
+ * Text Node Generator
  */
-class PostGeneratorImplementation extends PageGeneratorImplementation
+class TextGeneratorImplementation extends AbstractNodeGeneratorImplementation
 {
     /**
      * @param NodeInterface $parentNode
      * @param NodeType $nodeType
-     * @return NodeInterface|void
-     * @throws \Neos\ContentRepository\Exception\NodeExistsException
+     * @return NodeInterface
+     * @throws NodeExistsException
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {
-        $postNode = parent::create($parentNode, $nodeType);
-        $date = Date::random('-1 week');
-        $postNode->setProperty('datePublished', $date);
-        $postNode->setProperty('image', $this->getRandommImageVariant());
+        $contentNode = $parentNode->createNode(uniqid('node'), $nodeType);
+        $contentNode->setProperty('text', sprintf('<p>%s</p>', Lorem::paragraph(rand(1, 10))));
 
-        return $postNode;
+        return $contentNode;
     }
 }

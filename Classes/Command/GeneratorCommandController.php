@@ -8,9 +8,15 @@ namespace Flowpack\NodeGenerator\Command;
 
 use Flowpack\NodeGenerator\Generator\NodesGenerator;
 use Flowpack\NodeGenerator\Generator\PresetDefinition;
+use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
+use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
+use Neos\ContentRepository\Exception\NodeTypeNotFoundException;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
+use Neos\Flow\Exception;
+use Neos\Flow\Mvc\Exception\StopActionException;
 use Neos\Neos\Domain\Model\Site;
+use Neos\Neos\Domain\Repository\SiteRepository;
 use Neos\Neos\Domain\Service\ContentContext;
 use Neos\ContentRepository\Domain\Service\Context;
 use Neos\ContentRepository\Domain\Model\Node;
@@ -22,24 +28,24 @@ class GeneratorCommandController extends CommandController
 {
     /**
      * @Flow\Inject
-     * @var \Neos\Neos\Domain\Repository\SiteRepository
+     * @var SiteRepository
      */
     protected $siteRepository;
 
     /**
      * @Flow\Inject
-     * @var \Neos\ContentRepository\Domain\Repository\WorkspaceRepository
+     * @var WorkspaceRepository
      */
     protected $workspaceRepository;
 
     /**
      * @Flow\Inject
-     * @var \Neos\ContentRepository\Domain\Service\ContextFactoryInterface
+     * @var ContextFactoryInterface
      */
     protected $contextFactory;
 
     /**
-     * @Flow\Inject(setting="preset")
+     * @Flow\InjectConfiguration(path="preset", package="Flowpack.NodeGenerator")
      * @var array
      */
     protected $presets;
@@ -48,7 +54,9 @@ class GeneratorCommandController extends CommandController
      * Creates a big collection of node for performance benchmarking
      * @param string $siteNode
      * @param string $preset
-     * @throws \Neos\Flow\Mvc\Exception\StopActionException
+     * @throws StopActionException
+     * @throws NodeTypeNotFoundException
+     * @throws Exception
      */
     public function nodesCommand($siteNode, $preset)
     {
@@ -68,7 +76,7 @@ class GeneratorCommandController extends CommandController
 
         $workspace = 'live';
         if ($this->workspaceRepository->findByName($workspace)->count() === 0) {
-            $this->outputLine('Workspace "%s" does not exist', array($workspace));
+            $this->outputLine('Workspace "%s" does not exist', [$workspace]);
             $this->quit(1);
         }
 
@@ -91,11 +99,11 @@ class GeneratorCommandController extends CommandController
      */
     protected function createContext(Site $currentSite, $workspace = 'live')
     {
-        return $this->contextFactory->create(array(
+        return $this->contextFactory->create([
             'workspaceName' => $workspace,
             'currentSite' => $currentSite,
             'invisibleContentShown' => true,
             'inaccessibleContentShown' => true
-        ));
+        ]);
     }
 }

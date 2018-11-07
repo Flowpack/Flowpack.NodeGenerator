@@ -38,7 +38,7 @@ class NodesGenerator
     protected $preset;
 
     /**
-     * @Flow\Inject(setting="generator")
+     * @Flow\InjectConfiguration(path="generator", package="Flowpack.NodeGenerator")
      * @var array
      */
     protected $generators;
@@ -51,6 +51,10 @@ class NodesGenerator
         $this->preset = $preset;
     }
 
+    /**
+     * @throws Exception
+     * @throws NodeTypeNotFoundException
+     */
     public function generate()
     {
         $siteNode = $this->preset->getSiteNode();
@@ -60,7 +64,7 @@ class NodesGenerator
     /**
      * @param NodeType $nodeType
      * @return NodeGeneratorImplementationInterface
-     * @throws \Neos\Flow\Exception
+     * @throws Exception
      */
     protected function getNodeGeneratorImplementationClassByNodeType(NodeType $nodeType)
     {

@@ -6,22 +6,23 @@ namespace Flowpack\NodeGenerator\Generator\Document;
  *                                                                        *
  *                                                                        */
 
-use Flowpack\NodeGenerator\Generator\AstractNodeGeneratorImplementation;
+use Flowpack\NodeGenerator\Generator\AbstractNodeGeneratorImplementation;
 use KDambekalns\Faker\Company;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Exception\NodeExistsException;
 use Neos\ContentRepository\Utility;
 
 /**
  * Page Node Generator
  */
-class PageGeneratorImplementation extends AstractNodeGeneratorImplementation
+class PageGeneratorImplementation extends AbstractNodeGeneratorImplementation
 {
     /**
      * @param NodeInterface $parentNode
      * @param NodeType $nodeType
-     * @return NodeInterface|void
-     * @throws \Neos\ContentRepository\Exception\NodeExistsException
+     * @return NodeInterface
+     * @throws NodeExistsException
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {

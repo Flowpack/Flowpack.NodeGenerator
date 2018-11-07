@@ -7,7 +7,9 @@ namespace Flowpack\NodeGenerator\Generator;
  *                                                                        */
 
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\ResourceManagement\Exception;
 use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Media\Domain\Model\Adjustment\ResizeImageAdjustment;
 use Neos\Media\Domain\Model\Image;
 use Neos\Media\Domain\Model\ImageVariant;
 use Neos\Media\Domain\Repository\ImageRepository;
@@ -17,7 +19,7 @@ use Neos\ContentRepository\Domain\Model\NodeType;
 /**
  * Node Generator
  */
-abstract class AstractNodeGeneratorImplementation implements NodeGeneratorImplementationInterface
+abstract class AbstractNodeGeneratorImplementation implements NodeGeneratorImplementationInterface
 {
     /**
      * @Flow\Inject
@@ -33,24 +35,22 @@ abstract class AstractNodeGeneratorImplementation implements NodeGeneratorImplem
 
     /**
      * @return ImageVariant
-     * @throws \Neos\Flow\ResourceManagement\Exception
+     * @throws Exception
      */
-    protected function getRandommImageVariant()
+    protected function getRandomImageVariant()
     {
         $image = new Image($this->resourceManager->importResource(sprintf('resource://Flowpack.NodeGenerator/Private/Images/Sample%d.jpg', rand(1, 3))));
         $this->imageRepository->add($image);
 
-        return $image->createImageVariant(array(
-            array(
-                'command' => 'thumbnail',
-                'options' => array(
-                    'size' => array(
-                        'width' => 1500,
-                        'height' => 1024
-                    )
-                ),
-            ),
-        ));
+        $newImageVariant = new ImageVariant($image);
+        $resizeImageAdjustment = new ResizeImageAdjustment();
+        $resizeImageAdjustment->setWidth(1024);
+        $resizeImageAdjustment->setHeight(1500);
+
+        $newImageVariant->addAdjustment($resizeImageAdjustment);
+
+        $image->addVariant($newImageVariant);
+        return $newImageVariant;
     }
 
     /**
