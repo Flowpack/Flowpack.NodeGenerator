@@ -3,8 +3,6 @@ Flowpack:
     generator:
       'Neos.NodeTypes:Page':
         class: 'Flowpack\NodeGenerator\Generator\Document\PageGeneratorImplementation'
-      'Ttree.Blog:Post':
-        class: 'Flowpack\NodeGenerator\Generator\Document\PostGeneratorImplementation'
       'Neos.NodeTypes:Text':
         class: 'Flowpack\NodeGenerator\Generator\Content\TextGeneratorImplementation'
       'Neos.NodeTypes:Image':

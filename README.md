@@ -11,8 +11,6 @@ Flowpack:
     generator:
       'Neos.NodeTypes:Page':
         class: 'Flowpack\NodeGenerator\Generator\Document\PageGeneratorImplementation'
-      'Ttree.Blog:Post':
-        class: 'Flowpack\NodeGenerator\Generator\Document\PostGeneratorImplementation'
       'Neos.NodeTypes:Text':
         class: 'Flowpack\NodeGenerator\Generator\Content\TextGeneratorImplementation'
       'Neos.NodeTypes:Image':
@@ -28,12 +26,12 @@ don't need to take care about that. The generator will skip silently nodes that 
 in the content repository.
 
 ```php
-class PageGeneratorImplementation extends AstractNodeGeneratorImplementation {
+class PageGeneratorImplementation extends AbstractNodeGeneratorImplementation {
 
 	/**
 	 * @param NodeInterface $parentNode
 	 * @param NodeType $nodeType
-	 * @return NodeInterface|void
+	 * @return NodeInterface
 	 */
 	public function create(NodeInterface $parentNode, NodeType $nodeType) {
 		$title = Company::name();
