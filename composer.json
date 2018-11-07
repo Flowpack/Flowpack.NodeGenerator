@@ -5,7 +5,7 @@
     "description": "Random nodes generator for Neos CMS",
     "require": {
         "neos/neos": "~3.3 || ~4.0",
-        "kdambekalns/faker": "~4.0"
+        "fzaninotto/faker": "~1.8"
     },
     "autoload": {
         "psr-4": {

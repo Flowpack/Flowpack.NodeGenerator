@@ -6,7 +6,7 @@ namespace Flowpack\NodeGenerator\Generator\Content;
  *                                                                        *
  *                                                                        */
 
-use KDambekalns\Faker\Lorem;
+use Faker\Provider\Lorem;
 use Neos\ContentRepository\Exception\NodeExistsException;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;

@@ -6,7 +6,7 @@ namespace Flowpack\NodeGenerator\Generator\Document;
  *                                                                        *
  *                                                                        */
 
-use KDambekalns\Faker\Date;
+use Faker\Provider\DateTime;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Exception\NodeExistsException;
@@ -27,7 +27,7 @@ class PostGeneratorImplementation extends PageGeneratorImplementation
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {
         $postNode = parent::create($parentNode, $nodeType);
-        $date = Date::random('-1 week');
+        $date = DateTime::dateTimeBetween('-1 week', 'now');
         $postNode->setProperty('datePublished', $date);
         $postNode->setProperty('image', $this->getRandomImageVariant());
 

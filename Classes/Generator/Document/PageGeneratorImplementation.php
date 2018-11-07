@@ -6,8 +6,8 @@ namespace Flowpack\NodeGenerator\Generator\Document;
  *                                                                        *
  *                                                                        */
 
+use Faker\Factory;
 use Flowpack\NodeGenerator\Generator\AbstractNodeGeneratorImplementation;
-use KDambekalns\Faker\Company;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Exception\NodeExistsException;
@@ -26,7 +26,8 @@ class PageGeneratorImplementation extends AbstractNodeGeneratorImplementation
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {
-        $title = Company::name();
+        $faker = Factory::create();
+        $title = $faker->company;
         $name = Utility::renderValidNodeName($title);
 
         $childrenNode = $parentNode->createNode($name, $nodeType);

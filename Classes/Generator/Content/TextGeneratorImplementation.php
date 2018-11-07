@@ -6,8 +6,8 @@ namespace Flowpack\NodeGenerator\Generator\Content;
  *                                                                        *
  *                                                                        */
 
+use Faker\Provider\Lorem;
 use Flowpack\NodeGenerator\Generator\AbstractNodeGeneratorImplementation;
-use KDambekalns\Faker\Lorem;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Exception\NodeExistsException;
