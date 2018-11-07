@@ -1,10 +1,10 @@
 {
     "name": "flowpack/nodegenerator",
-    "type": "typo3-flow-package",
+    "type": "neos-package",
     "license": "MIT",
-    "description": "Random nodes generator for TYPO3 Neos",
+    "description": "Random nodes generator for Neos CMS",
     "require": {
-        "typo3/flow": "~2.3||~3.0",
+        "neos/neos": "~4.0",
         "kdambekalns/faker": "~4.0"
     },
     "autoload": {

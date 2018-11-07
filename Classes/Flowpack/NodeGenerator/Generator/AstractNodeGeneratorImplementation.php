@@ -2,7 +2,7 @@
 namespace Flowpack\NodeGenerator\Generator;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
@@ -33,6 +33,7 @@ abstract class AstractNodeGeneratorImplementation implements NodeGeneratorImplem
 
     /**
      * @return ImageVariant
+     * @throws \Neos\Flow\ResourceManagement\Exception
      */
     protected function getRandommImageVariant()
     {

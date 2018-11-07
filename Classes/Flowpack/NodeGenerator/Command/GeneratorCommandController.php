@@ -2,22 +2,23 @@
 namespace Flowpack\NodeGenerator\Command;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
 use Flowpack\NodeGenerator\Generator\NodesGenerator;
 use Flowpack\NodeGenerator\Generator\PresetDefinition;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Cli\CommandController;
 use Neos\Neos\Domain\Model\Site;
 use Neos\Neos\Domain\Service\ContentContext;
+use Neos\ContentRepository\Domain\Service\Context;
 use Neos\ContentRepository\Domain\Model\Node;
-use Neos\ContentRepository\Domain\Service\ContextInterface;
 
 /**
  * Generator Controller
  */
-class GeneratorCommandController extends \Neos\Flow\Cli\CommandController
+class GeneratorCommandController extends CommandController
 {
     /**
      * @Flow\Inject
@@ -47,6 +48,7 @@ class GeneratorCommandController extends \Neos\Flow\Cli\CommandController
      * Creates a big collection of node for performance benchmarking
      * @param string $siteNode
      * @param string $preset
+     * @throws \Neos\Flow\Mvc\Exception\StopActionException
      */
     public function nodesCommand($siteNode, $preset)
     {
@@ -85,7 +87,7 @@ class GeneratorCommandController extends \Neos\Flow\Cli\CommandController
     /**
      * @param Site $currentSite
      * @param string $workspace
-     * @return ContextInterface
+     * @return Context
      */
     protected function createContext(Site $currentSite, $workspace = 'live')
     {

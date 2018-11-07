@@ -2,11 +2,10 @@
 namespace Flowpack\NodeGenerator\Generator;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
-use Neos\Flow\Annotations as Flow;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
 

@@ -2,14 +2,14 @@
 namespace Flowpack\NodeGenerator\Generator\Content;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
 use KDambekalns\Faker\Lorem;
-use Neos\Flow\Annotations as Flow;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Exception\NodeExistsException;
 
 /**
  * Images Node Generator
@@ -20,6 +20,7 @@ class ImageGeneratorImplementation extends TextGeneratorImplementation
      * @param NodeInterface $parentNode
      * @param NodeType $nodeType
      * @return NodeInterface|void
+     * @throws NodeExistsException
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {

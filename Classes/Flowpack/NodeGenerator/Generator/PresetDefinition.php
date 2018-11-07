@@ -2,11 +2,10 @@
 namespace Flowpack\NodeGenerator\Generator;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
-use Neos\Flow\Annotations as Flow;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
@@ -65,9 +64,9 @@ class PresetDefinition
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    protected function getRandomness()
+    protected function getRandomness(): int
     {
         return (int)$this->randomness;
     }
@@ -75,15 +74,15 @@ class PresetDefinition
     /**
      * @return string
      */
-    public function getContentNodeType()
+    public function getContentNodeType(): string
     {
         return (string)$this->contentNodeType[array_rand($this->contentNodeType)];
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getDepth()
+    public function getDepth(): int
     {
         if ($this->getRandomness()) {
             $variant = $this->depth * $this->getRandomness() / 100;
@@ -99,15 +98,15 @@ class PresetDefinition
     /**
      * @return string
      */
-    public function getDocumentNodeType()
+    public function getDocumentNodeType(): string
     {
         return (string)$this->documentNodeType[array_rand($this->documentNodeType)];
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getNodeByLevel()
+    public function getNodeByLevel(): int
     {
         if ($this->getRandomness()) {
             $variant = $this->nodeByLevel * $this->getRandomness() / 100;
@@ -123,7 +122,7 @@ class PresetDefinition
     /**
      * @return int
      */
-    public function getContentNodeByDocument()
+    public function getContentNodeByDocument(): int
     {
         if ($this->getRandomness()) {
             $variant = $this->contentNodeByDocument * $this->getRandomness() / 100;
@@ -137,9 +136,9 @@ class PresetDefinition
     }
 
     /**
-     * @return \Neos\ContentRepository\Domain\Model\NodeInterface
+     * @return NodeInterface
      */
-    public function getSiteNode()
+    public function getSiteNode(): NodeInterface
     {
         return $this->siteNode;
     }

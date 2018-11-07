@@ -2,13 +2,12 @@
 namespace Flowpack\NodeGenerator\Generator\Document;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
 use Flowpack\NodeGenerator\Generator\AstractNodeGeneratorImplementation;
 use KDambekalns\Faker\Company;
-use Neos\Flow\Annotations as Flow;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Utility;
@@ -22,6 +21,7 @@ class PageGeneratorImplementation extends AstractNodeGeneratorImplementation
      * @param NodeInterface $parentNode
      * @param NodeType $nodeType
      * @return NodeInterface|void
+     * @throws \Neos\ContentRepository\Exception\NodeExistsException
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {

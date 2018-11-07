@@ -2,10 +2,11 @@
 namespace Flowpack\NodeGenerator\Generator;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
+use Neos\ContentRepository\Exception\NodeTypeNotFoundException;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Exception;
 use Neos\Flow\ObjectManagement\ObjectManagerInterface;
@@ -72,6 +73,8 @@ class NodesGenerator
     /**
      * @param NodeInterface $baseNode
      * @param int $level
+     * @throws Exception
+     * @throws NodeTypeNotFoundException
      */
     protected function createBatchDocumentNode(NodeInterface $baseNode, $level = 0)
     {
@@ -92,6 +95,8 @@ class NodesGenerator
 
     /**
      * @param NodeInterface $documentNode
+     * @throws Exception
+     * @throws NodeTypeNotFoundException
      */
     protected function createBatchContentNodes(NodeInterface $documentNode)
     {
