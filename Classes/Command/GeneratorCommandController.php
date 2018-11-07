@@ -90,6 +90,8 @@ class GeneratorCommandController extends CommandController
         $generator = new NodesGenerator($preset);
 
         $generator->generate();
+
+        $this->outputLine('Success: Node generation complete');
     }
 
     /**
