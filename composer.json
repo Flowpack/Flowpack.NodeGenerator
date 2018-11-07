@@ -4,7 +4,7 @@
     "license": "MIT",
     "description": "Random nodes generator for Neos CMS",
     "require": {
-        "neos/neos": "~4.0",
+        "neos/neos": "~3.3 || ~4.0",
         "kdambekalns/faker": "~4.0"
     },
     "autoload": {
