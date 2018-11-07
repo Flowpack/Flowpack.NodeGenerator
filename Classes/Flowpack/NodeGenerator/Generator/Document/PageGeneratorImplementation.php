@@ -8,10 +8,10 @@ namespace Flowpack\NodeGenerator\Generator\Document;
 
 use Flowpack\NodeGenerator\Generator\AstractNodeGeneratorImplementation;
 use KDambekalns\Faker\Company;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeType;
-use TYPO3\TYPO3CR\Utility;
+use Neos\Flow\Annotations as Flow;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Utility;
 
 /**
  * Page Node Generator

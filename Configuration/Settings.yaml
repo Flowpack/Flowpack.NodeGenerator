@@ -1,15 +1,15 @@
 Flowpack:
   NodeGenerator:
     generator:
-      'TYPO3.Neos.NodeTypes:Page':
+      'Neos.NodeTypes:Page':
         class: 'Flowpack\NodeGenerator\Generator\Document\PageGeneratorImplementation'
       'Ttree.Blog:Post':
         class: 'Flowpack\NodeGenerator\Generator\Document\PostGeneratorImplementation'
-      'TYPO3.Neos.NodeTypes:Text':
+      'Neos.NodeTypes:Text':
         class: 'Flowpack\NodeGenerator\Generator\Content\TextGeneratorImplementation'
-      'TYPO3.Neos.NodeTypes:Image':
+      'Neos.NodeTypes:Image':
         class: 'Flowpack\NodeGenerator\Generator\Content\ImageGeneratorImplementation'
-      'TYPO3.Neos.NodeTypes:TextWithImage':
+      'Neos.NodeTypes:TextWithImage':
         class: 'Flowpack\NodeGenerator\Generator\Content\TextWithImageGeneratorImplementation'
 
     preset:
@@ -18,24 +18,24 @@ Flowpack:
         depth: 3
         nodeByLevel: 10
         contentNodeByDocument: 5
-        documentNodeType: [ 'TYPO3.Neos.NodeTypes:Page' ]
-        contentNodeType: [ 'TYPO3.Neos.NodeTypes:Text' ]
+        documentNodeType: [ 'Neos.NodeTypes:Page' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 25
       medium-website:
         depth: 8
         nodeByLevel: 15
         contentNodeByDocument: 10
-        documentNodeType: [ 'TYPO3.Neos.NodeTypes:Page' ]
-        contentNodeType: [ 'TYPO3.Neos.NodeTypes:Text' ]
+        documentNodeType: [ 'Neos.NodeTypes:Page' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 45
       big-website:
         depth: 12
         nodeByLevel: 25
         contentNodeByDocument: 15
-        documentNodeType: [ 'TYPO3.Neos.NodeTypes:Page' ]
-        contentNodeType: [ 'TYPO3.Neos.NodeTypes:Text' ]
+        documentNodeType: [ 'Neos.NodeTypes:Page' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 15
 
@@ -45,7 +45,7 @@ Flowpack:
         nodeByLevel: 10
         contentNodeByDocument: 20
         documentNodeType: [ 'Ttree.Blog:Post' ]
-        contentNodeType: [ 'TYPO3.Neos.NodeTypes:Text', 'TYPO3.Neos.NodeTypes:Image', 'TYPO3.Neos.NodeTypes:TextWithImage' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:Image', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 0
       medium-blog:
@@ -53,7 +53,7 @@ Flowpack:
         nodeByLevel: 50
         contentNodeByDocument: 25
         documentNodeType: [ 'Ttree.Blog:Post' ]
-        contentNodeType: [ 'TYPO3.Neos.NodeTypes:Text', 'TYPO3.Neos.NodeTypes:Image', 'TYPO3.Neos.NodeTypes:TextWithImage' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:Image', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 12
       big-blog:
@@ -61,6 +61,6 @@ Flowpack:
         nodeByLevel: 200
         contentNodeByDocument: 30
         documentNodeType: [ 'Ttree.Blog:Post' ]
-        contentNodeType: [ 'TYPO3.Neos.NodeTypes:Text', 'TYPO3.Neos.NodeTypes:Image', 'TYPO3.Neos.NodeTypes:TextWithImage' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:Image', 'Neos.NodeTypes:TextWithImage' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 12

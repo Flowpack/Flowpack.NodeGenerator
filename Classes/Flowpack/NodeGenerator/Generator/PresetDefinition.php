@@ -6,8 +6,8 @@ namespace Flowpack\NodeGenerator\Generator;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
  * Preset Definition
@@ -137,7 +137,7 @@ class PresetDefinition
     }
 
     /**
-     * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
+     * @return \Neos\ContentRepository\Domain\Model\NodeInterface
      */
     public function getSiteNode()
     {

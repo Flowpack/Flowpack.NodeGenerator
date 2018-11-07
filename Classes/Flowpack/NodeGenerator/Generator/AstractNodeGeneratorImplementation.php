@@ -6,13 +6,13 @@ namespace Flowpack\NodeGenerator\Generator;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Resource\ResourceManager;
-use TYPO3\Media\Domain\Model\Image;
-use TYPO3\Media\Domain\Model\ImageVariant;
-use TYPO3\Media\Domain\Repository\ImageRepository;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeType;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Media\Domain\Model\Image;
+use Neos\Media\Domain\Model\ImageVariant;
+use Neos\Media\Domain\Repository\ImageRepository;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeType;
 
 /**
  * Node Generator

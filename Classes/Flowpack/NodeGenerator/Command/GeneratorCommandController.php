@@ -8,32 +8,32 @@ namespace Flowpack\NodeGenerator\Command;
 
 use Flowpack\NodeGenerator\Generator\NodesGenerator;
 use Flowpack\NodeGenerator\Generator\PresetDefinition;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Neos\Domain\Model\Site;
-use TYPO3\Neos\Domain\Service\ContentContext;
-use TYPO3\TYPO3CR\Domain\Model\Node;
-use TYPO3\TYPO3CR\Domain\Service\ContextInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\Neos\Domain\Model\Site;
+use Neos\Neos\Domain\Service\ContentContext;
+use Neos\ContentRepository\Domain\Model\Node;
+use Neos\ContentRepository\Domain\Service\ContextInterface;
 
 /**
  * Generator Controller
  */
-class GeneratorCommandController extends \TYPO3\Flow\Cli\CommandController
+class GeneratorCommandController extends \Neos\Flow\Cli\CommandController
 {
     /**
      * @Flow\Inject
-     * @var \TYPO3\Neos\Domain\Repository\SiteRepository
+     * @var \Neos\Neos\Domain\Repository\SiteRepository
      */
     protected $siteRepository;
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\TYPO3CR\Domain\Repository\WorkspaceRepository
+     * @var \Neos\ContentRepository\Domain\Repository\WorkspaceRepository
      */
     protected $workspaceRepository;
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface
+     * @var \Neos\ContentRepository\Domain\Service\ContextFactoryInterface
      */
     protected $contextFactory;
 

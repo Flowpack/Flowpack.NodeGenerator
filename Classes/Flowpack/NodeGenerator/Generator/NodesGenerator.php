@@ -6,13 +6,13 @@ namespace Flowpack\NodeGenerator\Generator;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Exception;
-use TYPO3\Flow\Object\ObjectManagerInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeType;
-use TYPO3\TYPO3CR\Domain\Service\NodeTypeManager;
-use TYPO3\TYPO3CR\Exception\NodeExistsException;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Exception;
+use Neos\Flow\ObjectManagement\ObjectManagerInterface;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Domain\Service\NodeTypeManager;
+use Neos\ContentRepository\Exception\NodeExistsException;
 
 /**
  * Node Generator
@@ -59,7 +59,7 @@ class NodesGenerator
     /**
      * @param NodeType $nodeType
      * @return NodeGeneratorImplementationInterface
-     * @throws \TYPO3\Flow\Exception
+     * @throws \Neos\Flow\Exception
      */
     protected function getNodeGeneratorImplementationClassByNodeType(NodeType $nodeType)
     {
