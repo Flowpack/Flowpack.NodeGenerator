@@ -2,7 +2,7 @@
 
 ## Configuration of the Node generator classes
 
-In your settings.yaml you can register node generator class. Each node type used in your setup, must
+In your Settings.yaml you can register a node generator class. Each node type used in your setup, must
 have an attached generator class.
 
 ```yaml
@@ -47,11 +47,11 @@ class PageGeneratorImplementation extends AbstractNodeGeneratorImplementation {
 
 ## Configuration of presets
 
-If multiple Content and Document node type are configured the generator will select a
+If multiple Content and Document node types are configured, the generator will select a
 random node type for each new node. Take care to declare a generator class for each node
 type.
 
-The Extension is shipped with some exemple of presets, a basic preset look like:
+The Extension is shipped with some examples of presets, a basic preset looks like:
 
 ```yaml
 Flowpack:
@@ -71,5 +71,5 @@ Flowpack:
 ## Run your preset
 
 ```
-flow generator:nodes --site-node blog --preset small-blog
+./flow generator:nodes --site-node blog --preset small-blog
 ```
