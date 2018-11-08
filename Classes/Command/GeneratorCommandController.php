@@ -2,43 +2,50 @@
 namespace Flowpack\NodeGenerator\Command;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
 use Flowpack\NodeGenerator\Generator\NodesGenerator;
 use Flowpack\NodeGenerator\Generator\PresetDefinition;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Neos\Domain\Model\Site;
-use TYPO3\Neos\Domain\Service\ContentContext;
-use TYPO3\TYPO3CR\Domain\Model\Node;
-use TYPO3\TYPO3CR\Domain\Service\ContextInterface;
+use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
+use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
+use Neos\ContentRepository\Exception\NodeTypeNotFoundException;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Cli\CommandController;
+use Neos\Flow\Exception;
+use Neos\Flow\Mvc\Exception\StopActionException;
+use Neos\Neos\Domain\Model\Site;
+use Neos\Neos\Domain\Repository\SiteRepository;
+use Neos\Neos\Domain\Service\ContentContext;
+use Neos\ContentRepository\Domain\Service\Context;
+use Neos\ContentRepository\Domain\Model\Node;
 
 /**
  * Generator Controller
  */
-class GeneratorCommandController extends \TYPO3\Flow\Cli\CommandController
+class GeneratorCommandController extends CommandController
 {
     /**
      * @Flow\Inject
-     * @var \TYPO3\Neos\Domain\Repository\SiteRepository
+     * @var SiteRepository
      */
     protected $siteRepository;
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\TYPO3CR\Domain\Repository\WorkspaceRepository
+     * @var WorkspaceRepository
      */
     protected $workspaceRepository;
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface
+     * @var ContextFactoryInterface
      */
     protected $contextFactory;
 
     /**
-     * @Flow\Inject(setting="preset")
+     * @Flow\InjectConfiguration(path="preset", package="Flowpack.NodeGenerator")
      * @var array
      */
     protected $presets;
@@ -47,6 +54,9 @@ class GeneratorCommandController extends \TYPO3\Flow\Cli\CommandController
      * Creates a big collection of node for performance benchmarking
      * @param string $siteNode
      * @param string $preset
+     * @throws StopActionException
+     * @throws NodeTypeNotFoundException
+     * @throws Exception
      */
     public function nodesCommand($siteNode, $preset)
     {
@@ -66,7 +76,7 @@ class GeneratorCommandController extends \TYPO3\Flow\Cli\CommandController
 
         $workspace = 'live';
         if ($this->workspaceRepository->findByName($workspace)->count() === 0) {
-            $this->outputLine('Workspace "%s" does not exist', array($workspace));
+            $this->outputLine('Workspace "%s" does not exist', [$workspace]);
             $this->quit(1);
         }
 
@@ -80,20 +90,22 @@ class GeneratorCommandController extends \TYPO3\Flow\Cli\CommandController
         $generator = new NodesGenerator($preset);
 
         $generator->generate();
+
+        $this->outputLine('Success: Node generation complete');
     }
 
     /**
      * @param Site $currentSite
      * @param string $workspace
-     * @return ContextInterface
+     * @return Context
      */
     protected function createContext(Site $currentSite, $workspace = 'live')
     {
-        return $this->contextFactory->create(array(
+        return $this->contextFactory->create([
             'workspaceName' => $workspace,
             'currentSite' => $currentSite,
             'invisibleContentShown' => true,
             'inaccessibleContentShown' => true
-        ));
+        ]);
     }
 }

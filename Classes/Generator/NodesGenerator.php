@@ -2,17 +2,18 @@
 namespace Flowpack\NodeGenerator\Generator;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Exception;
-use TYPO3\Flow\Object\ObjectManagerInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeType;
-use TYPO3\TYPO3CR\Domain\Service\NodeTypeManager;
-use TYPO3\TYPO3CR\Exception\NodeExistsException;
+use Neos\ContentRepository\Exception\NodeTypeNotFoundException;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Exception;
+use Neos\Flow\ObjectManagement\ObjectManagerInterface;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Domain\Service\NodeTypeManager;
+use Neos\ContentRepository\Exception\NodeExistsException;
 
 /**
  * Node Generator
@@ -37,7 +38,7 @@ class NodesGenerator
     protected $preset;
 
     /**
-     * @Flow\Inject(setting="generator")
+     * @Flow\InjectConfiguration(path="generator", package="Flowpack.NodeGenerator")
      * @var array
      */
     protected $generators;
@@ -50,6 +51,10 @@ class NodesGenerator
         $this->preset = $preset;
     }
 
+    /**
+     * @throws Exception
+     * @throws NodeTypeNotFoundException
+     */
     public function generate()
     {
         $siteNode = $this->preset->getSiteNode();
@@ -59,7 +64,7 @@ class NodesGenerator
     /**
      * @param NodeType $nodeType
      * @return NodeGeneratorImplementationInterface
-     * @throws \TYPO3\Flow\Exception
+     * @throws Exception
      */
     protected function getNodeGeneratorImplementationClassByNodeType(NodeType $nodeType)
     {
@@ -72,6 +77,8 @@ class NodesGenerator
     /**
      * @param NodeInterface $baseNode
      * @param int $level
+     * @throws Exception
+     * @throws NodeTypeNotFoundException
      */
     protected function createBatchDocumentNode(NodeInterface $baseNode, $level = 0)
     {
@@ -92,6 +99,8 @@ class NodesGenerator
 
     /**
      * @param NodeInterface $documentNode
+     * @throws Exception
+     * @throws NodeTypeNotFoundException
      */
     protected function createBatchContentNodes(NodeInterface $documentNode)
     {

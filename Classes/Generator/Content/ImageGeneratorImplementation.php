@@ -2,14 +2,15 @@
 namespace Flowpack\NodeGenerator\Generator\Content;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
-use KDambekalns\Faker\Lorem;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeType;
+use Faker\Provider\Lorem;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Exception\NodeExistsException;
+use Neos\Flow\ResourceManagement\Exception;
 
 /**
  * Images Node Generator
@@ -19,12 +20,14 @@ class ImageGeneratorImplementation extends TextGeneratorImplementation
     /**
      * @param NodeInterface $parentNode
      * @param NodeType $nodeType
-     * @return NodeInterface|void
+     * @return NodeInterface
+     * @throws NodeExistsException
+     * @throws Exception
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {
         $node = parent::create($parentNode, $nodeType);
-        $node->setProperty('image', $this->getRandommImageVariant());
+        $node->setProperty('image', $this->getRandomImageVariant());
 
         if (rand(0, 10) === 0) {
             $node->setProperty('hasCaption', true);

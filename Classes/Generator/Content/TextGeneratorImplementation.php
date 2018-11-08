@@ -2,25 +2,26 @@
 namespace Flowpack\NodeGenerator\Generator\Content;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Flowpack.NodeGenerator".*
+ * This script belongs to the Neos package "Flowpack.NodeGenerator".      *
  *                                                                        *
  *                                                                        */
 
-use Flowpack\NodeGenerator\Generator\AstractNodeGeneratorImplementation;
-use KDambekalns\Faker\Lorem;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\TYPO3CR\Domain\Model\NodeType;
+use Faker\Provider\Lorem;
+use Flowpack\NodeGenerator\Generator\AbstractNodeGeneratorImplementation;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeType;
+use Neos\ContentRepository\Exception\NodeExistsException;
 
 /**
  * Text Node Generator
  */
-class TextGeneratorImplementation extends AstractNodeGeneratorImplementation
+class TextGeneratorImplementation extends AbstractNodeGeneratorImplementation
 {
     /**
      * @param NodeInterface $parentNode
      * @param NodeType $nodeType
      * @return NodeInterface
+     * @throws NodeExistsException
      */
     public function create(NodeInterface $parentNode, NodeType $nodeType)
     {

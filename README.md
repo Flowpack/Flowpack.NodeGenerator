@@ -1,4 +1,4 @@
-# NodeGenerator - Random nodes generator for TYPO3 Neos
+# NodeGenerator - Random nodes generator for Neos CMS
 
 ## Configuration of the Node generator classes
 
@@ -9,15 +9,13 @@ have an attached generator class.
 Flowpack:
   NodeGenerator:
     generator:
-      'TYPO3.Neos.NodeTypes:Page':
+      'Neos.NodeTypes:Page':
         class: 'Flowpack\NodeGenerator\Generator\Document\PageGeneratorImplementation'
-      'Ttree.Blog:Post':
-        class: 'Flowpack\NodeGenerator\Generator\Document\PostGeneratorImplementation'
-      'TYPO3.Neos.NodeTypes:Text':
+      'Neos.NodeTypes:Text':
         class: 'Flowpack\NodeGenerator\Generator\Content\TextGeneratorImplementation'
-      'TYPO3.Neos.NodeTypes:Image':
+      'Neos.NodeTypes:Image':
         class: 'Flowpack\NodeGenerator\Generator\Content\ImageGeneratorImplementation'
-      'TYPO3.Neos.NodeTypes:TextWithImage':
+      'Neos.NodeTypes:TextWithImage':
         class: 'Flowpack\NodeGenerator\Generator\Content\TextWithImageGeneratorImplementation'
 ```
 
@@ -25,15 +23,15 @@ Flowpack:
 
 The NodesGenerators who call your node generator class, will catch NodeExistsException so you
 don't need to take care about that. The generator will skip silently nodes that currently exist
-in the TYPO3CR.
+in the content repository.
 
 ```php
-class PageGeneratorImplementation extends AstractNodeGeneratorImplementation {
+class PageGeneratorImplementation extends AbstractNodeGeneratorImplementation {
 
 	/**
 	 * @param NodeInterface $parentNode
 	 * @param NodeType $nodeType
-	 * @return NodeInterface|void
+	 * @return NodeInterface
 	 */
 	public function create(NodeInterface $parentNode, NodeType $nodeType) {
 		$title = Company::name();
@@ -64,8 +62,8 @@ Flowpack:
         depth: 3
         nodeByLevel: 10
         contentNodeByDocument: 5
-        documentNodeType: [ 'TYPO3.Neos.NodeTypes:Page' ]
-        contentNodeType: [ 'TYPO3.Neos.NodeTypes:Text', 'TYPO3.Neos.NodeTypes:Images' ]
+        documentNodeType: [ 'Neos.NodeTypes:Page' ]
+        contentNodeType: [ 'Neos.NodeTypes:Text', 'Neos.NodeTypes:Images' ]
         # Randomness of the number of nodes generated from 0 to 100
         randomness: 25
 ```
