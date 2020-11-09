@@ -73,3 +73,14 @@ Flowpack:
 ```
 ./flow generator:nodes --site-node blog --preset small-blog
 ```
+
+## Configure the root node
+
+By default all the generated pages will be created on the root-level
+of the site. This behavior can be changed by providing a specific path
+to an existing node:
+
+```
+flow generator:nodes --site-node homepage --preset small-blog --path blog
+```
+
