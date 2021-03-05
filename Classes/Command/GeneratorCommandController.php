@@ -54,11 +54,12 @@ class GeneratorCommandController extends CommandController
      * Creates a big collection of node for performance benchmarking
      * @param string $siteNode
      * @param string $preset
+     * @param string $path
      * @throws StopActionException
      * @throws NodeTypeNotFoundException
      * @throws Exception
      */
-    public function nodesCommand($siteNode, $preset)
+    public function nodesCommand($siteNode, $preset, $path = null)
     {
         if (!(isset($this->presets[$preset]))) {
             $this->outputLine('Error: Invalid preset');
@@ -82,11 +83,24 @@ class GeneratorCommandController extends CommandController
 
         /** @var Node $siteNode */
         $siteNode = $contentContext->getCurrentSiteNode();
-        if ($siteNode === null) {
-            $this->outputLine('Error: No site root node');
+
+        if ($path === null) {
+            $rootNode = $siteNode;
+        } else {
+            if (str_starts_with('/',$path)) {
+                // absolute path
+                $rootNode = $contentContext->getNode($path);
+            } else {
+                // relative path
+                $rootNode = $siteNode->getNode($path);
+            }
+        }
+
+        if ($rootNode === null) {
+            $this->outputLine('Error: Could not determine the root node');
             $this->quit(1);
         }
-        $preset = new PresetDefinition($siteNode, $preset);
+        $preset = new PresetDefinition($rootNode, $preset);
         $generator = new NodesGenerator($preset);
 
         $generator->generate();
